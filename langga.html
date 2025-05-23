@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Secret Love Messages</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            background-color: #fff0f5;
+            background-image: url('https://i.imgur.com/8QZQZQZ.png');
+            background-size: 200px;
+            background-attachment: fixed;
+        }
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+            border: 2px solid #ff69b4;
+            transition: all 0.5s ease;
+        }
+        
+        h1 {
+            color: #ff1493;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #ff69b4;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        input {
+            padding: 12px;
+            width: 250px;
+            margin: 15px 0;
+            border: 2px solid #ffb6c1;
+            border-radius: 25px;
+            font-size: 16px;
+            text-align: center;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        input:focus {
+            border-color: #ff69b4;
+            box-shadow: 0 0 8px rgba(255, 105, 180, 0.4);
+        }
+        
+        #submitBtn {
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+        }
+        
+        #submitBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(255, 105, 180, 0.4);
+            background: linear-gradient(45deg, #ff1493, #ff69b4);
+        }
+        
+        .message-buttons {
+            display: none;
+            margin-top: 30px;
+            animation: fadeIn 1s;
+        }
+        
+        .message-button {
+            background: linear-gradient(45deg, #ffb6c1, #ff69b4);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+            border: 2px solid white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .message-button:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 6px 12px rgba(255, 105, 180, 0.4);
+        }
+        
+        .message-button::before {
+            content: "❤";
+            position: absolute;
+            font-size: 20px;
+            opacity: 0;
+            transition: all 0.5s;
+        }
+        
+        .message-button:hover::before {
+            opacity: 0.6;
+            transform: translate(-20px, -20px);
+        }
+        
+        #error {
+            color: #ff1493;
+            margin-top: 15px;
+            font-style: italic;
+            min-height: 20px;
+        }
+        
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .monthsary-counter {
+            margin-top: 20px;
+            color: #ff69b4;
+            font-size: 18px;
+            font-weight: bold;
+            display: none;
+        }
+        
+        .love-note {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #fff0f5;
+            border-radius: 10px;
+            border-left: 4px solid #ff69b4;
+            text-align: left;
+            font-style: italic;
+            color: #555;
+            display: none;
+        }
+        
+        .hidden-message {
+            display: none;
+            font-size: 12px;
+            padding: 5px;
+        }
+        
+        .heart-icon {
+            font-size: 24px;
+        }
+        
+        .unlock-animation {
+            animation: unlock 1s ease;
+        }
+        
+        @keyframes unlock {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="mainContainer">
+        <h1>My Secret Love Messages</h1>
+        <p class="subtitle">Only for someone very special ❤</p>
+        
+        <div id="accessPanel">
+            <p>To unlock my heart's messages, please enter the special name:</p>
+            <input type="text" id="nameInput" placeholder="Type the secret name...">
+            <button id="submitBtn" onclick="checkName()">Unlock My Heart</button>
+            <p id="error"></p>
+        </div>
+        
+        <div class="monthsary-counter" id="monthsaryCounter"></div>
+        
+        <div id="messageButtons" class="message-buttons">
+            <h2 style="color: #ff1493;">Messages From My Heart</h2>
+            <p>Click each heart to reveal a special message</p>
+            
+            <div class="message-button" onclick="revealMessage(1)">
+                <span class="heart-icon">❤</span>
+                <span class="hidden-message" id="message1">You make my heart skip a beat every single day</span>
+            </div>
+            <div class="message-button" onclick="revealMessage(2)">
+                <span class="heart-icon">❤</span>
+                <span class="hidden-message" id="message2">I fall in love with you more each month we're together</span>
+            </div>
+            <div class="message-button" onclick="revealMessage(3)">
+                <span class="heart-icon">❤</span>
+                <span class="hidden-message" id="message3">Your smile is my favorite sight in the world</span>
+            </div>
+            <div class="message-button" onclick="revealMessage(4)">
+                <span class="heart-icon">❤</span>
+                <span class="hidden-message" id="message4">Being with you is my greatest joy and privilege</span>
+            </div>
+            <div class="message-button" onclick="revealMessage(5)">
+                <span class="heart-icon">❤</span>
+                <span class="hidden-message" id="message5">I promise to keep choosing you every single day</span>
+            </div>
+            
+            <div class="love-note" id="loveNote">
+                <p>My dearest, these messages have been in my heart for you. Each click reveals another piece of how much you mean to me. I love you more with each passing month.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create floating hearts
+        function createHearts() {
+            const colors = ['#ffb6c1', '#ff69b4', '#ff1493', '#db7093'];
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.opacity = Math.random() * 0.5 + 0.3;
+                heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+                document.body.appendChild(heart);
+            }
+        }
+        
+        // Set monthsary counter
+        function setMonthsaryCounter() {
+            const monthsaryDate = new Date(); // Change this to your actual monthsary date
+            // monthsaryDate.setMonth(monthsaryDate.getMonth() - 1); // Example: 1 month ago
+            const diff = Math.floor((new Date() - monthsaryDate) / (1000 * 60 * 60 * 24 * 30));
+            const months = diff + 1; // Adjust based on your counting
+            
+            document.getElementById('monthsaryCounter').textContent = 
+                `Celebrating ${months} Beautiful Month${months > 1 ? 's' : ''} Together`;
+        }
+        
+        function checkName() {
+            const name = document.getElementById('nameInput').value.trim();
+            const errorElement = document.getElementById('error');
+            const messageButtons = document.getElementById('messageButtons');
+            const accessPanel = document.getElementById('accessPanel');
+            const monthsaryCounter = document.getElementById('monthsaryCounter');
+            const loveNote = document.getElementById('loveNote');
+            const mainContainer = document.getElementById('mainContainer');
+            
+            if (name.toLowerCase() === 'langga') {
+                // Hide access panel
+                accessPanel.style.display = 'none';
+                
+                // Show message buttons and other elements
+                messageButtons.style.display = 'block';
+                monthsaryCounter.style.display = 'block';
+                loveNote.style.display = 'block';
+                
+                // Add visual effects
+                mainContainer.classList.add('unlock-animation');
+                createHearts();
+                setMonthsaryCounter();
+                
+                // Romantic greeting
+                setTimeout(() => {
+                    alert("You've unlocked my heart, my love. ❤️ Click each heart to reveal my messages for you.");
+                }, 500);
+            } else {
+                errorElement.textContent = 'That name is not in my heart. Try again my love.';
+                document.getElementById('nameInput').value = '';
+                document.getElementById('nameInput').focus();
+            }
+        }
+        
+        function revealMessage(buttonNumber) {
+            const button = document.querySelectorAll('.message-button')[buttonNumber - 1];
+            const heartIcon = button.querySelector('.heart-icon');
+            const message = button.querySelector('.hidden-message');
+            
+            // Hide heart icon and show message
+            heartIcon.style.display = 'none';
+            message.style.display = 'block';
+            
+            // Change button style
+            button.style.background = 'linear-gradient(45deg, #ff1493, #ff69b4)';
+            button.style.fontSize = '12px';
+            button.style.padding = '5px';
+            
+            // Add small heart after message
+            if (!button.querySelector('.small-heart')) {
+                const smallHeart = document.createElement('span');
+                smallHeart.className = 'small-heart';
+                smallHeart.innerHTML = ' ❤';
+                button.appendChild(smallHeart);
+            }
+            
+            // Play a gentle sound (optional)
+            // const audio = new Audio('https://www.soundjay.com/buttons/sounds/button-09.mp3');
+            // audio.volume = 0.2;
+            // audio.play();
+        }
+        
+        // Allow pressing Enter key to submit name
+        document.getElementById('nameInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkName();
+            }
+        });
+    </script>
+</body>
+</html>
