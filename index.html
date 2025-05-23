@@ -183,11 +183,12 @@
 </head>
 <body>
     <div class="container" id="mainContainer">
-        <h1>My Secret Love Messages</h1>
+        <h1>Hehe Happy Monthsarry!!</h1>
         <p class="subtitle">Only for someone very special ❤</p>
         
         <div id="accessPanel">
             <p>To unlock my heart's messages, please enter the special name:</p>
+            <p>Tip: It's what I call you, and what I call you when I speak about you.</p>
             <input type="text" id="nameInput" placeholder="Type the secret name...">
             <button id="submitBtn" onclick="checkName()">Unlock My Heart</button>
             <p id="error"></p>
@@ -196,16 +197,16 @@
         <div class="monthsary-counter" id="monthsaryCounter"></div>
         
         <div id="messageButtons" class="message-buttons">
-            <h2 style="color: #ff1493;">Messages From My Heart</h2>
+            <h2 style="color: #ff1493;">Messages From Your Pinakapoging BF</h2>
             <p>Click each heart to reveal a special message</p>
             
             <div class="message-button" onclick="revealMessage(1)">
                 <span class="heart-icon">❤</span>
-                <span class="hidden-message" id="message1">You make my heart skip a beat every single day</span>
+                <span class="hidden-message" id="message1">I love you more each day.</span>
             </div>
             <div class="message-button" onclick="revealMessage(2)">
                 <span class="heart-icon">❤</span>
-                <span class="hidden-message" id="message2">I fall in love with you more each month we're together</span>
+                <span class="hidden-message" id="message2">You make me fall in love with you all over again.</span>
             </div>
             <div class="message-button" onclick="revealMessage(3)">
                 <span class="heart-icon">❤</span>
@@ -221,7 +222,7 @@
             </div>
             
             <div class="love-note" id="loveNote">
-                <p>My dearest, these messages have been in my heart for you. Each click reveals another piece of how much you mean to me. I love you more with each passing month.</p>
+                <p>Hiiii langgaaaa!! Happy Monthsarry!!! I know time's been tough and I just want to let you know that I am always here for you, for better and for worse. I love you so much, you mean so much to me and I won't give up on us no matter what!!!!! MWAMWAMWAMWA</p>
             </div>
         </div>
     </div>
@@ -250,7 +251,7 @@
             const monthsaryDate = new Date(); // Change this to your actual monthsary date
             // monthsaryDate.setMonth(monthsaryDate.getMonth() - 1); // Example: 1 month ago
             const diff = Math.floor((new Date() - monthsaryDate) / (1000 * 60 * 60 * 24 * 30));
-            const months = diff + 1; // Adjust based on your counting
+            const months = diff + 52; // Adjust based on your counting
             
             document.getElementById('monthsaryCounter').textContent = 
                 `Celebrating ${months} Beautiful Month${months > 1 ? 's' : ''} Together`;
@@ -281,10 +282,10 @@
                 
                 // Romantic greeting
                 setTimeout(() => {
-                    alert("You've unlocked my heart, my love. ❤️ Click each heart to reveal my messages for you.");
+                    alert("You've unlocked my heart, palangga. ❤️ Click each heart to reveal my messages for you.");
                 }, 500);
             } else {
-                errorElement.textContent = 'That name is not in my heart. Try again my love.';
+                errorElement.textContent = 'That name is not in my heart. Try again palangging.';
                 document.getElementById('nameInput').value = '';
                 document.getElementById('nameInput').focus();
             }
@@ -312,10 +313,7 @@
                 button.appendChild(smallHeart);
             }
             
-            // Play a gentle sound (optional)
-            // const audio = new Audio('https://www.soundjay.com/buttons/sounds/button-09.mp3');
-            // audio.volume = 0.2;
-            // audio.play();
+          
         }
         
         // Allow pressing Enter key to submit name
